@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<syntax name="language-root.taskpaper">
+	<zones>
+		<!-- Root-level projects -->
+		<zone name="project">
+			<starts-with>
+				<expression>^(\S.*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
+				<capture number="1" name="name"/>
+				<capture number="2" name="punctuation.colon"/>
+				<capture number="3" name="project-tags">
+					<subzones>
+						<include collection="tags" />
+					</subzones>
+				</capture>
+			</starts-with>
+			<!--
+			Project ends if next line is not:
+			
+			1) More indentation than the starting indent for the zone
+			2) Nothing but indentation
+			-->
+			<ends-with>^(?![ \t]|[ \t]*$)</ends-with>
+			<subzones>
+				<include collection="nested-zones" />
+			</subzones>
+		</zone>
+		<!-- It's weird, but possible to have a "nested" zone at the root level -->
+		<include collection="nested-zones" />
+	</zones>
+	
+	<library>
+		<collection name="nested-zones">
+			<include collection="nested-projects" />
+			<include collection="tasks" />
+		</collection>
+		
+		<collection name="nested-projects">
+			<zone name="project">
+				<starts-with>
+					<expression>^([ \t]+)(\S.*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
+					<capture number="2" name="name"/>
+					<capture number="3" name="punctuation.colon"/>
+					<capture number="4" name="project-tags">
+						<subzones>
+							<include collection="tags" />
+						</subzones>
+					</capture>
+				</starts-with>
+				<ends-with>^(?!\1[ \t]|[ \t]*$)</ends-with>
+				<subzones>
+					<include collection="nested-zones" />
+				</subzones>
+			</zone>
+		</collection>
+		
+		<collection name="tasks">
+			<zone>
+				<expression>^[ \t]*((-)(?: .* | )@done(?:\(\d+-\d+-\d+\))?.*)[\n\r]*$</expression>
+				<capture number="1" name="task.done">
+					<subzones>
+						<include collection="tags" />
+					</subzones>
+				</capture>
+				<capture number="2" name="punctuation.definition.begin"/>
+			</zone>
+			<zone>
+				<expression>^[ \t]*((-)(?: .* | )@today.*)[\n\r]*$</expression>
+				<capture number="1" name="task.today">
+					<subzones>
+						<include collection="tags" />
+					</subzones>
+				</capture>
+				<capture number="2" name="punctuation.definition.begin"/>
+			</zone>
+			<zone>
+				<expression>^[ \t]*((-) .*)[\n\r]*$</expression>
+				<capture number="1" name="task">
+					<subzones>
+						<include collection="tags" />
+					</subzones>
+				</capture>
+				<capture number="2" name="punctuation.definition.begin"/>
+			</zone>
+		</collection>
+		
+		<collection name="tags">
+			<zone name="tag">
+				<expression>(@)([^(\s]+)(?:((\().*?(\))))?</expression>
+				<capture number="1" name="punctuation.definition.begin"/>
+				<capture number="2" name="name"/>
+				<capture number="3" name="value"/>
+				<capture number="4" name="punctuation.brace.curly.open"/>
+				<capture number="5" name="punctuation.brace.curly.close"/>
+			</zone>
+		</collection>
+	</library>
+</syntax>

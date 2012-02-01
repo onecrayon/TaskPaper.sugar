@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<language id="com.onecrayon.taskpaper">
+		<root-zone>language-root.taskpaper</root-zone>
+
+		<name>TaskPaper</name>
+
+		<detectors>
+			<extension>taskpaper</extension>
+		</detectors>
+	</language>
+</settings>

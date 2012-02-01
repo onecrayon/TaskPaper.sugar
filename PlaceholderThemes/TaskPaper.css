@@ -1,0 +1,30 @@
+/*
+	@theme TaskPaper Placeholder
+	@placeholder taskpaper
+*/
+
+taskpaper {
+	/* Anything that isn't a task or project is a note, so color accordingly */
+	color: #bc670f;
+}
+
+taskpaper project > name {
+	color: #000;
+	font-weight: bold;
+}
+
+taskpaper task {
+	color: #000;
+}
+
+taskpaper task.done, taskpaper task.done * {
+	color: #b2b2b2;
+}
+
+taskpaper task.today {
+	color: #d44950;
+}
+
+taskpaper tag {
+	font-style: italic;
+}
