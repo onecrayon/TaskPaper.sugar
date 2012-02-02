@@ -2,7 +2,7 @@
 <syntax name="language-root.taskpaper">
 	<zones>
 		<!-- Root-level projects -->
-		<zone name="project">
+		<zone name="project.x-item-block">
 			<starts-with>
 				<expression>^([^\s-].*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
 				<capture number="1" name="name"/>
@@ -20,7 +20,7 @@
 			2) Nothing but indentation
 			-->
 			<ends-with>^(?![ \t]|[ \t]*$)</ends-with>
-			<subzones>
+			<subzones name="x-item-body">
 				<include collection="nested-zones" />
 			</subzones>
 		</zone>
@@ -35,7 +35,7 @@
 		</collection>
 		
 		<collection name="nested-projects">
-			<zone name="project">
+			<zone name="project.x-item-block">
 				<starts-with>
 					<expression>^([ \t]+)([^\s-].*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
 					<capture number="2" name="name"/>
@@ -47,7 +47,7 @@
 					</capture>
 				</starts-with>
 				<ends-with>^(?!\1[ \t]|[ \t]*$)</ends-with>
-				<subzones>
+				<subzones name="x-item-body">
 					<include collection="nested-zones" />
 				</subzones>
 			</zone>

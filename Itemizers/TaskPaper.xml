@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<itemizer>
+	
+	<!--
+	The same downsides as are in the first-party Python.sugar exist for this one:
+	
+	- Itemizers are not nested because <end-selector> is not checked for subrecipes
+	- The "x-item-body" approach, however, is necessary or else folding the project will hide absolutely everything and nested projects end up selecting their leading whitespace
+	
+	There's no real good fix for this, so here's hoping that Espresso starts checking end-selector for recipes down the road; I'm not willing to take the other trade-offs at the moment (particularly since I rarely have any nested projects)
+	-->
+	<recipe name="taskpaper.project">
+		<start-selector>taskpaper project > name:capture(name)</start-selector>
+		<end-selector>taskpaper x-item-body</end-selector>
+		<subrecipes>
+			<include-root-recipes/>
+		</subrecipes>
+	</recipe>
+	
+</itemizer>
