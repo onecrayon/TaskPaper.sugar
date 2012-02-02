@@ -1,0 +1,13 @@
+Possibilities:
+	- Add Archive action? @possibility
+	- Add "Delete entry and sub-entries" action? @possibility
+	- Priority-based coloring? @possibility
+	  Are priorities even common enough to care about this? Would require a bunch of new synatx zones
+	- Figure out a better way to handle detection of the beginning hyphen for tasks (current implementation can harvest hyphens in the middle of tasks) @improvement
+
+Changelog:
+	v1.0.0:
+		- Basic syntax highlighting @done
+		- Placeholder theme to match Espresso Tutti Colori @done
+		- Actions to toggle done and today tags @done
+		- Automatic insertion of tasks with a linebreak @done
