@@ -5,7 +5,7 @@
 		<script>toggle-tag.js</script>
 		<language-context>taskpaper</language-context>
 		<syntax-context>task, task *</syntax-context>
-		<key-equivalent>command shift D</key-equivalent>
+		<key-equivalent>command control d</key-equivalent>
 		<setup>
 			<tag>@done</tag>
 		</setup>
@@ -15,7 +15,7 @@
 		<script>toggle-tag.js</script>
 		<language-context>taskpaper</language-context>
 		<syntax-context>task, task *</syntax-context>
-		<key-equivalent>command y</key-equivalent>
+		<key-equivalent>command control y</key-equivalent>
 		<setup>
 			<tag>@today</tag>
 		</setup>
