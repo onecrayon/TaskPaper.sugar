@@ -55,31 +55,37 @@
 		
 		<collection name="tasks">
 			<zone>
-				<expression>^[ \t]*((-)(?: .* | )@done(?:\(\d+-\d+-\d+\))?.*)[\n\r]*$</expression>
+				<expression>^[ \t]*(-(?: .* | )@done(?:\(\d+-\d+-\d+\))?.*)[\n\r]*$</expression>
 				<capture number="1" name="task.done">
 					<subzones>
+						<zone name="punctuation.definition.begin">
+							<expression>(?&lt;=^|[ \t])-(?= )</expression>
+						</zone>
 						<include collection="tags" />
 					</subzones>
 				</capture>
-				<capture number="2" name="punctuation.definition.begin"/>
 			</zone>
 			<zone>
-				<expression>^[ \t]*((-)(?: .* | )@today.*)[\n\r]*$</expression>
+				<expression>^[ \t]*(-(?: .* | )@today.*)[\n\r]*$</expression>
 				<capture number="1" name="task.today">
 					<subzones>
+						<zone name="punctuation.definition.begin">
+							<expression>(?&lt;=^|[ \t])-(?= )</expression>
+						</zone>
 						<include collection="tags" />
 					</subzones>
 				</capture>
-				<capture number="2" name="punctuation.definition.begin"/>
 			</zone>
 			<zone>
-				<expression>^[ \t]*((-) .*)[\n\r]*$</expression>
+				<expression>^[ \t]*(- .*)[\n\r]*$</expression>
 				<capture number="1" name="task">
 					<subzones>
+						<zone name="punctuation.definition.begin">
+							<expression>(?&lt;=^|[ \t])-(?= )</expression>
+						</zone>
 						<include collection="tags" />
 					</subzones>
 				</capture>
-				<capture number="2" name="punctuation.definition.begin"/>
 			</zone>
 		</collection>
 		
