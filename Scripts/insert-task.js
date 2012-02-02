@@ -40,7 +40,7 @@ action.performWithContext = function(context, outError) {
 		rootZone = rootZone.parent;
 	}
 	
-	if (rootZone === undefined) {
+	if (rootZone === undefined || cursor.location === context.string.length) {
 		// Reset our zone to the zone immediately before the cursor
 		zone = context.syntaxTree.zoneAtCharacterIndex(cursor.location - 1);
 		if (rootSelector.matches(zone) && zone.text === '- ') {
@@ -59,7 +59,7 @@ action.performWithContext = function(context, outError) {
 		}
 	} else {
 		// We are inside of a task element
-		if (cursor.location < rootZone.range.length + 2) {
+		if (cursor.location < rootZone.range.location + 2) {
 			// The cursor is in the start of the task line, prior to the actual text
 			// Insert a newline immediately prior to the task
 			recipe.insertAtIndex(context.lineStorage.lineRangeForIndex(cursor.location).location, context.textPreferences.lineEndingString);
