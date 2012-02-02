@@ -21,4 +21,10 @@
 		</setup>
 	</action>
 	
+	<action id="com.onecrayon.sugar.taskpaper.auto-insert-task" category="hidden">
+		<script>insert-task.js</script>
+		<language-context>taskpaper</language-context>
+		<text-trigger key-equivalent="enter"></text-trigger>
+	</action>
+	
 </action-recipes>
