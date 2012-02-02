@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<action-recipes>
+	
+	<action id="com.onecrayon.sugar.taskpaper.toggle-done" category="taskpaper.root/1">
+		<script>toggle-tag.js</script>
+		<language-context>taskpaper</language-context>
+		<syntax-context>task, task *</syntax-context>
+		<key-equivalent>command shift D</key-equivalent>
+		<setup>
+			<tag>@done</tag>
+		</setup>
+	</action>
+	
+	<action id="com.onecrayon.sugar.taskpaper.toggle-today" category="taskpaper.root/2">
+		<script>toggle-tag.js</script>
+		<language-context>taskpaper</language-context>
+		<syntax-context>task, task *</syntax-context>
+		<key-equivalent>command y</key-equivalent>
+		<setup>
+			<tag>@today</tag>
+		</setup>
+	</action>
+	
+</action-recipes>

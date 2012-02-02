@@ -1,0 +1,4 @@
+"taskpaper.root.title" = "TaskPaper";
+
+"com.onecrayon.sugar.taskpaper.toggle-done.title" = "Toggle @done";
+"com.onecrayon.sugar.taskpaper.toggle-today.title" = "Toggle @today";
