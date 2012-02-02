@@ -4,8 +4,7 @@
 	<action id="com.onecrayon.sugar.taskpaper.toggle-done" category="taskpaper.root/1">
 		<script>toggle-tag.js</script>
 		<language-context>taskpaper</language-context>
-		<syntax-context>task, task *</syntax-context>
-		<key-equivalent>command control d</key-equivalent>
+		<key-equivalent>control option d</key-equivalent>
 		<setup>
 			<tag>@done</tag>
 		</setup>
@@ -14,8 +13,7 @@
 	<action id="com.onecrayon.sugar.taskpaper.toggle-today" category="taskpaper.root/2">
 		<script>toggle-tag.js</script>
 		<language-context>taskpaper</language-context>
-		<syntax-context>task, task *</syntax-context>
-		<key-equivalent>command control y</key-equivalent>
+		<key-equivalent>control option y</key-equivalent>
 		<setup>
 			<tag>@today</tag>
 		</setup>
