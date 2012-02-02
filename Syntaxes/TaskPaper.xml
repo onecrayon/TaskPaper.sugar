@@ -4,7 +4,7 @@
 		<!-- Root-level projects -->
 		<zone name="project">
 			<starts-with>
-				<expression>^(\S.*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
+				<expression>^([^\s-].*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
 				<capture number="1" name="name"/>
 				<capture number="2" name="punctuation.colon"/>
 				<capture number="3" name="project-tags">
@@ -37,7 +37,7 @@
 		<collection name="nested-projects">
 			<zone name="project">
 				<starts-with>
-					<expression>^([ \t]+)(\S.*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
+					<expression>^([ \t]+)([^\s-].*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</expression>
 					<capture number="2" name="name"/>
 					<capture number="3" name="punctuation.colon"/>
 					<capture number="4" name="project-tags">
