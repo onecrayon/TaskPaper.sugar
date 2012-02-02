@@ -2,8 +2,8 @@
 
 TaskPaper.sugar adds support for [TaskPaper](http://www.hogbaysoftware.com/products/taskpaper) files in Espresso, along with some actions to make working with them easier:
 
-* **Toggle @done** `command control D`
-* **Toggle @today** `command control Y`
+* **Toggle @done** `control option D`
+* **Toggle @today** `control option Y`
 
 Additionally, it will behave the same as the actual TaskPaper app when entering newlines.
 
