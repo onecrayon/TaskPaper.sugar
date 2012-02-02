@@ -5,7 +5,7 @@
 
 taskpaper {
 	/* Anything that isn't a task or project is a note, so color accordingly */
-	color: #bc670f;
+	color: #b2b2b2;
 }
 
 taskpaper project > name {
@@ -18,15 +18,15 @@ taskpaper task {
 }
 
 taskpaper task > punctuation.definition.begin {
-	color: #4F9FCF;
+	color: #3a77bf;
 }
 
 taskpaper task.done, taskpaper task.done * {
-	color: #b2b2b2;
+	color: #3a77bf;
 }
 
 taskpaper task.today {
-	color: #d44950;
+	color: #d4430d;
 }
 
 taskpaper tag {
