@@ -5,13 +5,29 @@
 // Shared selectors
 var rootSelector = new SXSelector('task'),
 	taskSelector = new SXSelector('task, task *'),
-	tagSelector = new SXSelector('tag');
+	tagSelector = new SXSelector('tag'),
+	projectSelector = new SXSelector('project, project > x-item-body');
 
 function findRoot(zone) {
 	while (!rootSelector.matches(zone)) {
 		zone = zone.parent;
 	}
 	return zone;
+}
+
+// Recursively parses through zones to find all nested tasks
+function findChildTasks(zones, finalArray) {
+	var sxZone = (typeof zones.childCount !== 'undefined' ? true : false),
+		count = (sxZone ? zones.childCount : zones.length),
+		zone;
+	for (var i = 0; i < count; i++) {
+		zone = (sxZone ? zones.childAtIndex(i) : zones[i]);
+		if (rootSelector.matches(zone)) {
+			finalArray.push(zone);
+		} else if (projectSelector.matches(zone)) {
+			findChildTasks(zone, finalArray);
+		}
+	}
 }
 
 action.performWithContext = function(context, outError) {
@@ -39,11 +55,7 @@ action.performWithContext = function(context, outError) {
 			// We work with line ranges, because the selection might not completely encompass the task zone(s)
 			range = context.lineStorage.lineRangeForRange(context.selectedRanges[i]);
 			tempZones = context.syntaxTree.zonesInCharacterRange(range);
-			for (var j = 0, countZones = tempZones.length; j < countZones; j++) {
-				if (rootSelector.matches(tempZones[j])) {
-					zones.push(tempZones[j]);
-				}
-			}
+			findChildTasks(tempZones, zones);
 		}
 	}
 	
