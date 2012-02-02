@@ -7,6 +7,11 @@
 
 		<detectors>
 			<extension>taskpaper</extension>
+			
+			<combo>
+				<extension>txt</extension>
+				<match-content lines="1">^([^\s-].*?(:))((?:\s+@\S+(?:\(.*?\))?)*)\s*$</match-content>
+			</combo>
 		</detectors>
 	</language>
 </settings>
