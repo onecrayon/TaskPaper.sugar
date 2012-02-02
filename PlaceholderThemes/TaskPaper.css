@@ -17,6 +17,10 @@ taskpaper task {
 	color: #000;
 }
 
+taskpaper task > punctuation.definition.begin {
+	color: #4F9FCF;
+}
+
 taskpaper task.done, taskpaper task.done * {
 	color: #b2b2b2;
 }
