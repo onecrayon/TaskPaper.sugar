@@ -79,7 +79,12 @@ action.performWithContext = function(context, outError) {
 		}
 		if (tagZone === null) {
 			// There's no tag yet, so add one
-			recipe.insertAtIndex(zone.range.location + zone.range.length, ' ' + tag);
+			// Make sure that we don't have a newline in our zone
+			var targetIndex = zone.range.location + zone.range.length;
+			if (/^.*?[\n\r]+$/.test(zone.text)) {
+				targetIndex -= 1;
+			}
+			recipe.insertAtIndex(targetIndex, ' ' + tag);
 		} else {
 			if (tagZone.range.location === zone.range.location + 2) {
 				// The @tag is the very first thing in the task, so delete the space following it
