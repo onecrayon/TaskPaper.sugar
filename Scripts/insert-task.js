@@ -43,21 +43,18 @@ action.performWithContext = function(context, outError) {
 	if (rootZone === undefined || cursor.location === context.string.length) {
 		// Reset our zone to the zone immediately before the cursor
 		zone = context.syntaxTree.zoneAtCharacterIndex(cursor.location - 1);
-		if (rootSelector.matches(zone) && zone.text === '- ') {
-			// We are in an empty task element, so delete it
-			recipe.deleteRange(zone.range);
-			return context.applyTextRecipe(recipe);
-		} else if (taskSelector.matches(zone)) {
-			// The task element is immediately to the left of the cursor, so insert a new task snippet
-			return context.insertTextSnippet(new CETextSnippet('\n- $0'));
-		} else if (projectSelector.matches(zone)) {
-			// The prior element is the project, so insert a linebreak and increase our indentation level
-			return context.insertTextSnippet(new CETextSnippet('\n\t'));
-		} else {
-			// There is no task element near the cursor, so just insert a linebreak normally
-			return context.insertTextSnippet(new CETextSnippet('\n'));
-		}
-	} else {
+	}
+	if (rootSelector.matches(zone) && /^-\s+$/.test(zone.text)) {
+		// We are in an empty task element, so delete it and add a newline
+		recipe.replaceRange(zone.range, '\n\n');
+		return context.applyTextRecipe(recipe, CETextOptionNormalizeIndentationLevel);
+	} else if (taskSelector.matches(zone)) {
+		// The task element is immediately to the left of the cursor, so insert a new task snippet
+		return context.insertTextSnippet(new CETextSnippet('\n- $1'));
+	} else if (projectSelector.matches(zone)) {
+		// The prior element is the project, so insert a linebreak and increase our indentation level
+		return context.insertTextSnippet(new CETextSnippet('\n\t'));
+	} else if (rootZone !== undefined) {
 		// We are inside of a task element
 		if (cursor.location < rootZone.range.location + 2) {
 			// The cursor is in the start of the task line, prior to the actual text
@@ -67,7 +64,7 @@ action.performWithContext = function(context, outError) {
 		} else {
 			// We are inside the task element, but need to trim the whitespace from around the cursor before we insert our new task snippet
 			var trimIndex = cursor.location;
-			while (/^\s$/.test(context.substringWithRange(new Range(trimIndex - 1, 1)))) {
+			while (/^[ \t]$/.test(context.substringWithRange(new Range(trimIndex - 1, 1)))) {
 				trimIndex--;
 			}
 			if (trimIndex < cursor.location) {
@@ -77,12 +74,15 @@ action.performWithContext = function(context, outError) {
 			// Apply our recipe prior to moving on
 			context.applyTextRecipe(recipe);
 			var snippet = '\n-';
-			if (!/^\s$/.test(context.substringWithRange(new Range(cursor.location, 1)))) {
+			if (!/^[ \t]$/.test(context.substringWithRange(new Range(cursor.location, 1)))) {
 				// No whitespace after the cursor, so add to our snippet
 				snippet += ' ';
 			}
 			// Insert it!
 			return context.insertTextSnippet(new CETextSnippet(snippet));
 		}
+	} else {
+		// There is no task element near the cursor, so just insert a linebreak normally
+		return context.insertTextSnippet(new CETextSnippet('\n'));
 	}
 };
